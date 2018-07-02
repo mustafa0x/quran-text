@@ -1,10 +1,11 @@
-# -*- coding: utf-8
 import re
 import sys
 
 """
 Updates tanzil.net's quran-uthmani-pause-marks.txt to match
 the orthography of the latest Medinah mushaf.
+
+Usage: `python3 update.py quran-uthmani-pause-marks.txt`
 
 See: https://github.com/alquran-foundation/quran-text
 """
@@ -36,8 +37,9 @@ repls = [
     (r'[ًٌٍ](?=[اى]?( [ۖۗۚۛۜ])?[ \n][تثجدذرزسشصضطظفقكلمنوي])', lambda m: tanween[m.group(0)]),
 ]
 
-out_file = open('quran-uthmani.txt', 'w')
-for ayah in open(sys.argv[1]):
-    for r in repls:
-        ayah = re.sub(r[0], r[1], ayah)
-    out_file.write(ayah)
+if __name__ == '__main__':
+    out_file = open('quran-uthmani.txt', 'w')
+    for ayah in open(sys.argv[1]):
+        for r in repls:
+            ayah = re.sub(r[0], r[1], ayah)
+        out_file.write(ayah)
