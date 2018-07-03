@@ -19,7 +19,7 @@ repls = [
     # Use the more semantically correct madd
     ('ٓ', 'ۤ'),
     # Remove spaces before pause marks
-    (r' ([ۖۗۚۛۜ])', r'\1'),
+    (r' ([ۖۗۚۛۜۘ])', r'\1'),
 
     # Use U+06CC (Farsi Yeh) for all yaa positions,
     # instead of U+064A (Arabic Yeh) for starting and middle,
