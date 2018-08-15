@@ -32,9 +32,22 @@ repls = [
     ('ٌۢ', 'ُۢ'),
     ('ٍۭ', 'ِۭ'),
 
+    # An anamoly, especially as 'بَعۡدِ مَا' does have a space
+    ('بَعۡدَمَا', 'بَعۡدَ مَا'),
+
+    # Replace diamonds with dots (each occurs once).
+    ('۪', 'ٜ'),
+    ('۫', '۬'),
+
+    # Unnecessary alif maksoorah
+    ('یَٰصَىٰحِبَیِ', 'یَٰصَٰحِبَیِ'),
+
     # Use open Tanween (U+08F0, U+08F1, U+08F2) in ikhfaa' and
     # idghaam cases, instead of regular Tanween (U+064B, U+064C, U+064D)
     (r'[ًٌٍ](?=[اى]?[ۖۗۚۛۜۘ۟]?( ۩)?[ \n](۞ )?[تثجدذرزسشصضطظفقكلمنوی])', lambda m: tanween[m.group(0)]),
+
+    # Use hamzah below
+    (r'[ئؤ](?=[ࣲِ][ ۭۚ])', lambda m: {'ئ':'ی', 'ؤ': 'و'}[m.group(0)] + 'ٕ'),
 ]
 
 if __name__ == '__main__':
