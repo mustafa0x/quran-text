@@ -1,5 +1,6 @@
 import re
 import sys
+import json
 
 """
 Updates tanzil.net's quran-uthmani-pause-marks.txt to match
@@ -50,9 +51,21 @@ repls = [
     (r'[ئؤ](?=[ࣲِ][ ۭۚ])', lambda m: {'ئ':'ی', 'ؤ': 'و'}[m.group(0)] + 'ٕ'),
 ]
 
+def replace_word(s, new_word, word_i):
+    words = s.split(' ')
+    words[word_i - 1] = new_word
+    return ' '.join(words)
+
 if __name__ == '__main__':
     old = open(sys.argv[1]).read()
     for r in repls:
         old = re.sub(r[0], r[1], old)
 
-    open('quran-uthmani.txt', 'w').write(old)
+    lines = old.split('\n')
+    for aid, changes in json.load(open('pause-mark-changes.json')).items():
+        for change in changes:
+            if lines[int(aid) - 1].startswith('بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِیمِ '):
+                change[0] += 4
+            lines[int(aid) - 1] = replace_word(lines[int(aid) - 1], change[2], change[0])
+
+    open('quran-uthmani.txt', 'w').write('\n'.join(lines))
