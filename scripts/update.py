@@ -25,7 +25,7 @@ repls = [
     # instead of U+064A (Arabic Yeh) for starting and middle,
     # and U+0649 (Alef Maksura) for final and isolated
     ('ي', 'ی'),
-    (r'ِ(ا۟)?ى|ى[ٌَُِّْ]', lambda m: m.group(0).replace('ى', 'ی')),
+    (r'ِ(ا۟)?ى|ى[ٌَُِّۡ]', lambda m: m.group(0).replace('ى', 'ی')),
 
     # Replace tanween with harakah before meem al-iqlaab
     ('ًۢ', 'َۢ'),
@@ -34,12 +34,12 @@ repls = [
 
     # Use open Tanween (U+08F0, U+08F1, U+08F2) in ikhfaa' and
     # idghaam cases, instead of regular Tanween (U+064B, U+064C, U+064D)
-    (r'[ًٌٍ](?=[اى]?( [ۖۗۚۛۜ])?[ \n][تثجدذرزسشصضطظفقكلمنوي])', lambda m: tanween[m.group(0)]),
+    (r'[ًٌٍ](?=[اى]?[ۖۗۚۛۜۘ۟]?( ۩)?[ \n](۞ )?[تثجدذرزسشصضطظفقكلمنوی])', lambda m: tanween[m.group(0)]),
 ]
 
 if __name__ == '__main__':
-    out_file = open('quran-uthmani.txt', 'w')
-    for ayah in open(sys.argv[1]):
-        for r in repls:
-            ayah = re.sub(r[0], r[1], ayah)
-        out_file.write(ayah)
+    old = open(sys.argv[1]).read()
+    for r in repls:
+        old = re.sub(r[0], r[1], old)
+
+    open('quran-uthmani.txt', 'w').write(old)
