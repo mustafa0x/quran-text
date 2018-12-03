@@ -56,6 +56,17 @@ repls = [
     (r'ۦ(?=[ِنمّ])', 'ـۧ'),
     ('نُۨجِی', 'نُـۨجِی'),
     ('لِیَسُۥۤـُٔوا۟', 'لِیَسُـࣳۤـُٔوا۟'),
+
+    # Dagger alifs
+    # Add tatweel after joining characters
+    (r'([بت-خس-غف-نهیٔ]ّ?َ)ٰ', r'\1ـٰ'),
+    # For non joining characters, we add a hair space (U+200A)
+    # so that the alif appears on the line, not above the letter.
+    # We then add a word joiner (U+2060) so that it doesn't cut
+    # the word in half when wrapping.
+    (r'(ء[ً-ْ]*)(ٰۤ?)', r'\1 \2⁠ '),
+    (r'([دذرزوءأ]ّ?َ)ٰ', r'\1 ٰ⁠'),
+    ('فَٱدَّ ٰ⁠رَ ٰ⁠ٔۡتُمۡ', 'فَٱدَّ ٰ⁠رَ ٰٔۡ ⁠تُمۡ'),
 ]
 
 def replace_word(s, change):
