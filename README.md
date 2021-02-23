@@ -1,7 +1,7 @@
 # Quran Text
 
 This Quran text is derived from Tanzil's Uthmani text. Most of the changes are taken from the following two texts:
-- [The QPC's text (v13)](https://fonts.qurancomplex.gov.sa/wp02/wp-content/uploads/2019/11/Hafs-ver13.zip)
+- [The QPC's text (v13)](https://fonts.qurancomplex.gov.sa/wp02/wp-content/uploads/2020/12/UthmanicHafs1_Ver13.zip)
 - [khaledhosny/quran-data](https://github.com/khaledhosny/quran-data)
 
 The major goals of this text are threefold:
